@@ -1,15 +1,26 @@
-from numpy import  array as nparr
-from math import ceil
-def fn_np(a,b):
-    dif = abs(sum(a)-sum(b))/2
-    c = abs(nparr(a,ndmin=2).T - b)*1.0  
-    print(c)  
-    c = abs(c - dif)
-    print(c)
-    m,y = c.argmin(),c.shape[1]
-    coo = (ceil(m/y)-1, m % y)
-    a[coo[0]],b[coo[1]] = b[coo[1]],a[coo[0]]
-    return a,b
+#coding=utf-8  
+class Trie:  
+    root = {}  
+    END = '/'  
+    def add(self, word):  
+        #从根节点遍历单词,char by char,如果不存在则新增,最后加上一个单词结束标志  
+        node = self.root  
+        for c in word:  
+            node=node.setdefault(c,{})  
+        node[self.END] = None
+                
+    def find(self, word):  
+        node = self.root  
+        for c in word:  
+            if c not in node:  
+                return False  
+            node = node[c]  
+        return self.END in node
 
-a=[1,3,5,7,9]; b=[2,4,6,8,10]
-print(fn_np(a,b))
+tree = Trie()
+List = ["A", "to", "tea", "ted", "ten", "i", "in", "inn"]
+for s in List:
+        tree.add(s)
+print (tree.root)
+
+print (tree.find('ted'))
