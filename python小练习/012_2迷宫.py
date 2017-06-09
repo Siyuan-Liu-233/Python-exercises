@@ -21,7 +21,7 @@ while position_now!=go_in:
 			rount[position_before]=position_now
 			visit.append(position_before)
 	try:
-		position_now=visit.pop(0)
+		position_now=visit.pop()
 	except:
 		print("can't find")
 		break
